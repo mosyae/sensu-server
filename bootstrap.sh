@@ -8,6 +8,7 @@ gpgcheck=0
 enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 sudo yum install redis -y
 # Now edit /etc/redis.conf file and change "protected-mode yes" to "protected-mode no"
+sudo sed -i.bak -e '0,/protected-mode yes/ s/protected-mode yes/protected-mode no/' /etc/redis.conf
 sudo systemctl enable redis
 sudo systemctl start redis
 sudo yum install sensu uchiwa -y
